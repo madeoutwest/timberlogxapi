@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -10,9 +9,18 @@ export default async function handler(req, res) {
   
   let url;
   if (endpoint === 'typeahead') {
-    // Add Oregon context to restrict results to Oregon state
     url = `https://app.regrid.com/api/v1/typeahead.json?query=${encodeURIComponent(query)}&context=/us/or&token=${REGRID_TOKEN}`;
   } else if (endpoint === 'search') {
     url = `https://app.regrid.com/api/v1/search.json?query=${encodeURIComponent(query)}&context=${encodeURIComponent(context)}&limit=1&token=${REGRID_TOKEN}`;
   } else {
-    return res.sta
+    return res.status(400).json({ error: 'Invalid endpoint' });
+  }
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
