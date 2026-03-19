@@ -2,7 +2,7 @@
   "name": "timberlogx-api",
   "version": "1.0.0",
   "dependencies": {
-    "@sparticuz/chromium": "123.0.1",
-    "puppeteer-core": "22.6.1"
+    "@sparticuz/chromium": "119.0.2",
+    "puppeteer-core": "21.5.2"
   }
 }
