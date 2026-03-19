@@ -2,7 +2,6 @@
   "name": "timberlogx-api",
   "version": "1.0.0",
   "dependencies": {
-    "@sparticuz/chromium": "112.0.0",
-    "puppeteer-core": "20.1.0"
+    "node-fetch": "2.6.9"
   }
 }
