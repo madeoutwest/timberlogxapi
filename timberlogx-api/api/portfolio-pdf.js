@@ -452,11 +452,10 @@ ${properties.sort((a, b) => ((b.total_value || 0) * ((b.ownership_interest || 10
 </body>
 </html>`;
 
-    // Launch Puppeteer with Vercel-compatible config
-   browser = await puppeteer.launch({
+  browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(),
+      executablePath: await chromium.executablePath,
       headless: chromium.headless,
     });
 
