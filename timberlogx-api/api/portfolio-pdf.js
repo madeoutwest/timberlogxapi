@@ -1,5 +1,5 @@
-const chromium = require('chrome-aws-lambda');
-const puppeteer = chromium.puppeteer;
+const chromium = require('@sparticuz/chromium');
+const puppeteer = require('puppeteer-core');
 
 module.exports = async (req, res) => {
   // CORS
@@ -452,10 +452,10 @@ ${properties.sort((a, b) => ((b.total_value || 0) * ((b.ownership_interest || 10
 </body>
 </html>`;
 
-  browser = await puppeteer.launch({
+browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath,
+      executablePath: await chromium.executablePath(),
       headless: chromium.headless,
     });
 
