@@ -463,7 +463,7 @@ ${properties.sort((a, b) => ((b.total_value || 0) * ((b.ownership_interest || 10
         '--single-process',
       ],
       defaultViewport: { width: 1280, height: 960 },
-      executablePath: await chromium.executablePath('/tmp/localChromium/chromium/linux-1281452/chrome-linux/chrome'),
+     executablePath: await chromium.executablePath(),
       headless: true,
     });
 
