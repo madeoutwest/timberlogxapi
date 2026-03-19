@@ -236,8 +236,9 @@ ${properties.sort((a,b) => ((b.total_value||0)*((b.ownership_interest||100)/100)
   const isFrac = (p.ownership_interest || 100) < 100;
   const stands = p.app_state?.stands || [];
   const assumptions = p.app_state?.assumptions || {};
-  const reportImages = p.app_state?.reportImages || [];
-  const mapImage = reportImages.length > 0 ? reportImages[0].data : null;
+  const imageUrls = p.app_state?.imageUrls || [];
+  const mapImage = imageUrls.length > 0 ? imageUrls[0].url : null;
+  const extraImages = imageUrls.slice(1);
 
   const standRows = stands.map((s, i) => {
     const speciesMap = {
@@ -310,7 +311,11 @@ ${properties.sort((a,b) => ((b.total_value||0)*((b.ownership_interest||100)/100)
     <div><div class="assumption-label">Net Stumpage</div><div class="assumption-value">${fCur((assumptions.logPrice||0)-(assumptions.loggingCost||0)-6)}/MBF</div></div>
   </div>` : ''}
 
-  ${mapImage ? `<div style="margin-top:16px;"><img src="${mapImage}" style="width:100%;max-height:220px;object-fit:cover;border-radius:6px;border:1px solid #e8e7e0;" alt="Property Map"></div>` : ''}
+  ${mapImage ? `
+  <div style="margin-top:16px;">
+    <img src="${mapImage}" style="width:100%;max-height:240px;object-fit:cover;border-radius:6px;border:1px solid #e8e7e0;" alt="Property Map">
+    ${extraImages.length > 0 ? `<div style="display:flex;gap:8px;margin-top:8px;">${extraImages.map(img => `<img src="${img.url}" style="flex:1;max-height:140px;object-fit:cover;border-radius:4px;border:1px solid #e8e7e0;" alt="${img.label||''}">`).join('')}</div>` : ''}
+  </div>` : ''}
 
   <div class="disclaimer">Screening-level estimate only. Not a certified appraisal. Professional timber cruise and site inspection recommended prior to any transaction.</div>
   <div class="page-footer"><span>${p.name || 'Property'} — ${p.county || ''} County</span><span style="font-weight:600;letter-spacing:0.1em;opacity:0.5;">CONFIDENTIAL</span><span>Made Out West Land Co.</span></div>
