@@ -1,5 +1,5 @@
-const chromium = require('@sparticuz/chromium');
-const puppeteer = require('puppeteer-core');
+const chromium = require('chrome-aws-lambda');
+const puppeteer = chromium.puppeteer;
 
 module.exports = async (req, res) => {
   // CORS
